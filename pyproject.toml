@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "product-radar"
+version = "0.1.0"
+description = "Product Radar web API and acquisition worker"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "alembic==1.20.0",
+  "argon2-cffi==25.1.0",
+  "fastapi==0.141.1",
+  "httpx==0.28.1",
+  "pydantic-settings==2.15.0",
+  "python-dotenv==1.2.2",
+  "requests==2.34.2",
+  "uvicorn[standard]==0.52.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "ruff==0.16.4",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*", "meli*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+exclude = ["examples"]
+
+[tool.ruff.lint]
+select = ["B", "E4", "E7", "E9", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.13"
+files = ["app"]
+strict = true
+warn_unreachable = true

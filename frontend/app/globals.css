@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+:root {
+  --background: #07110f;
+  --surface: #0d1c18;
+  --surface-soft: #122620;
+  --surface-raised: #173129;
+  --foreground: #eef7f3;
+  --muted: #96aea5;
+  --line: #234038;
+  --accent: #69e4ad;
+  --accent-strong: #2fc982;
+  --danger: #fb7185;
+  --control-height: 2.75rem;
+  --control-radius: 0.5rem;
+  --control-duration: 180ms;
+  --control-border: #527469;
+  --accent-hover: #8bedc1;
+  --accent-pressed: #4cd796;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--foreground);
+  background:
+    radial-gradient(circle at 12% 0%, rgb(37 109 82 / 24%), transparent 30rem),
+    linear-gradient(180deg, #081512 0%, var(--background) 55%);
+  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 50;
+  top: 0.75rem;
+  left: 0.75rem;
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+  background: var(--accent);
+  padding: 0.65rem 0.9rem;
+  color: #062318;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.control {
+  position: relative;
+  display: inline-flex;
+  min-height: var(--control-height);
+  min-width: var(--control-height);
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--control-radius);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--control-duration),
+    border-color var(--control-duration),
+    color var(--control-duration),
+    box-shadow var(--control-duration),
+    transform var(--control-duration);
+}
+
+.control--primary {
+  background: var(--accent);
+  color: #062318;
+}
+.control--secondary {
+  background: var(--surface);
+  border-color: var(--control-border);
+  color: var(--foreground);
+}
+.control--ghost {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.control--sm {
+  padding: 0.5rem 0.625rem;
+}
+.control__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.control__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.control:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.control[aria-busy="true"] {
+  cursor: progress;
+}
+.control:enabled:active,
+a.control:active {
+  transform: translateY(1px);
+  background: var(--surface-raised);
+}
+.control--primary:enabled:active,
+a.control--primary:active {
+  background: var(--accent-pressed);
+}
+.activity {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: activity-spin 850ms linear infinite;
+}
+@keyframes activity-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nav-link {
+  display: block;
+  min-height: var(--control-height);
+  border-radius: var(--control-radius);
+  padding: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition:
+    background-color var(--control-duration),
+    color var(--control-duration),
+    box-shadow var(--control-duration),
+    transform var(--control-duration);
+}
+.nav-link[aria-current="page"] {
+  background: var(--surface-soft);
+  color: var(--foreground);
+  font-weight: 600;
+}
+.nav-link:active {
+  background: var(--surface-raised);
+  transform: translateY(1px);
+}
+nav {
+  padding-top: 6px;
+}
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+.data-table {
+  width: 100%;
+  min-width: 42rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+.data-table thead {
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+.data-table th,
+.data-table td {
+  padding: 0.75rem;
+}
+.data-table tbody tr {
+  border-top: 1px solid var(--line);
+  transition: background-color var(--control-duration);
+}
+.data-table tbody tr:focus-within {
+  background: var(--surface-soft);
+}
+input,
+select {
+  min-height: var(--control-height);
+}
+summary {
+  cursor: pointer;
+  border-radius: var(--control-radius);
+}
+summary::marker {
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .control--primary:enabled:hover,
+  a.control--primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 3px 12px rgb(105 228 173 / 14%);
+  }
+  .control--secondary:enabled:hover,
+  a.control--secondary:hover {
+    background: var(--surface-raised);
+    border-color: var(--accent);
+    box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
+  }
+  .control--ghost:enabled:hover,
+  a.control--ghost:hover {
+    background: var(--surface-raised);
+    color: var(--accent-hover);
+  }
+  .nav-link:hover {
+    background: var(--surface-soft);
+    color: var(--foreground);
+    box-shadow: inset 0 0 0 1px var(--control-border);
+  }
+  .data-table tbody tr:hover {
+    background: var(--surface-soft);
+  }
+  summary:hover {
+    color: var(--accent);
+  }
+}
+
+.history-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  background: rgb(0 0 0 / 55%);
+}
+.history-panel {
+  width: min(100%, 32rem);
+  height: 100dvh;
+  overflow-y: auto;
+  background: var(--surface);
+  border-left: 1px solid var(--control-border);
+  padding: 1.5rem;
+  box-shadow: -12px 0 40px rgb(0 0 0 / 25%);
+}
+.history-panel h2 {
+  scroll-margin-top: 1.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control,
+  .nav-link,
+  .data-table tbody tr {
+    transition: none;
+  }
+  .control:enabled:active,
+  a.control:active,
+  .nav-link:active {
+    transform: none;
+  }
+  .activity,
+  .animate-pulse {
+    animation: none;
+  }
+}

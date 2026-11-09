@@ -1,0 +1,29 @@
+# Local configuration and credentials.
+.env
+.env.*
+!.env.example
+.oauth_session.json
+
+# Runtime data and backups.
+/data/
+/reports/
+/backups/
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Python.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Frontend.
+frontend/node_modules/
+frontend/.next/
+frontend/coverage/
+frontend/tsconfig.tsbuildinfo
